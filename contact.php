@@ -24,7 +24,10 @@
 </html>
 <?php
 
+include 'includes/database_functions.php';
 
+//connect to the mysql db
+$dbc = mysqli_connect(DBConfig::$host, DBConfig::$username, DBConfig::$password, DBConfig::$name) or die ("Error connecting to MySQL server: " . mysqli_connect_error());
 
 echo '<table border="1">
     <tr>
@@ -35,8 +38,42 @@ echo '<table border="1">
         <td><a href="contact.php">lastname</a><br></td>
         <td><a href="contact.php">email</a><br></td>
     </tr>
-    <tr><td>login_id</td><td>username</td><td>password</td><td>firstname</td><td>lastname</td><td>email</td></tr>
-    </table> ';
+    <tr>
+        <td>login_id</td>
+        <td>username</td>
+        <td>password</td>
+        <td>firstname</td>
+        <td>lastname</td>
+        <td>email</td>
+     </tr>';
+    //</table>';
+
+    //retrieve the assigned login_id for the newly created user
+    $query = "SELECT * FROM " . DBConfig::$userTable;
+    $result = mysqli_query($dbc, $query) or die ("Error querying database: Retrieving login_id: " . mysqli_error());
+
+    $rows = mysqli_num_rows($result);
+    
+    echo $rows;
+    
+    for ($x = 0; $x < $rows; $x++)
+    {
+        $xlogin_id  = mysql_result($result, $x, "login_id");
+        $xusername  = mysql_result($result, $x, "username");
+        $xpassword  = mysql_result($result, $x, "password");
+        $xfirstname = mysql_result($result, $x, "firstname");
+        $xlastname  = mysql_result($result, $x, "lastname");
+        $xemail     = mysql_result($result, $x, "email");
+        
+        echo '<tr><td>' . $xlogin_id  . '</td>
+                  <td>' . $xusername  . '</td>
+                  <td>' . $xpassword  . '</td>
+                  <td>' . $xfirstname . '</td>
+                  <td>' . $xlastname  . '</td>
+                  <td>' . $xemail     . '</td><tr>';
+    }
+
+    echo '</table>'
 ?>
 
 </html>
