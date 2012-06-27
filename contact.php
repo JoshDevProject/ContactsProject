@@ -37,16 +37,7 @@ echo '<table border="1">
         <td><a href="contact.php">firstname</a><br></td>
         <td><a href="contact.php">lastname</a><br></td>
         <td><a href="contact.php">email</a><br></td>
-    </tr>
-    <tr>
-        <td>login_id</td>
-        <td>username</td>
-        <td>password</td>
-        <td>firstname</td>
-        <td>lastname</td>
-        <td>email</td>
-     </tr>';
-    //</table>';
+    </tr>';
 
     //retrieve the assigned login_id for the newly created user
     $query = "SELECT * FROM " . DBConfig::$userTable;
@@ -56,14 +47,14 @@ echo '<table border="1">
     
     echo 'Contacts: ' . $rows;
     
-    for ($x = 0; $x < $rows; $x++)
+    while($info = mysqli_fetch_assoc($result))
     {
-        $xlogin_id  = mysql_result($result, $x, "login_id");
-        $xusername  = mysql_result($result, $x, "username");
-        $xpassword  = mysql_result($result, $x, "password");
-        $xfirstname = mysql_result($result, $x, "firstname");
-        $xlastname  = mysql_result($result, $x, "lastname");
-        $xemail     = mysql_result($result, $x, "email");
+        $xlogin_id  = $info['login_id'];
+        $xusername  = $info['username']; 
+        $xpassword  = $info['password'];
+        $xfirstname = $info['firstname'];
+        $xlastname  = $info['lastname'];
+        $xemail     = $info['email'];
         
         echo '<tr><td>' . $xlogin_id  . '</td>
                   <td>' . $xusername  . '</td>
