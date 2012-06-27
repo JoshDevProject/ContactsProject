@@ -54,7 +54,7 @@ echo '<table border="1">
 
     $rows = mysqli_num_rows($result);
     
-    echo $rows;
+    echo 'Contacts: ' . $rows;
     
     for ($x = 0; $x < $rows; $x++)
     {
