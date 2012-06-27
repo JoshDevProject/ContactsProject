@@ -8,5 +8,6 @@ echo $_SESSION['access'];
 
 //get_access_level();
 
+//check_level(1);
 
 ?>

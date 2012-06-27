@@ -37,7 +37,16 @@ echo '<table border="1">
         <td><a href="contact.php">firstname</a><br></td>
         <td><a href="contact.php">lastname</a><br></td>
         <td><a href="contact.php">email</a><br></td>
-    </tr>';
+    </tr>
+    <tr>
+        <td>login_id</td>
+        <td>username</td>
+        <td>password</td>
+        <td>firstname</td>
+        <td>lastname</td>
+        <td>email</td>
+     </tr>';
+    //</table>';
 
     //retrieve the assigned login_id for the newly created user
     $query = "SELECT * FROM " . DBConfig::$userTable;
