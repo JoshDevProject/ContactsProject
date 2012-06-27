@@ -8,8 +8,8 @@ function user_login ($username,$password)
 {
     if (authenticate($username,$password)) 
     {        
-        echo $_SESSION['access'];
-        //header("location: 1.php");
+        
+        header("location: 1.php");
     }
     else 
     {
@@ -17,7 +17,7 @@ function user_login ($username,$password)
     }
 }
 
-//returns number of users with the username/password given
+//returns true if the username/password combination are found in the database
 //also sets the session access level from the users info
 function authenticate ($username,$password) 
 {  
@@ -30,10 +30,10 @@ function authenticate ($username,$password)
     
     $info = mysqli_fetch_assoc($result);
     
-    //get the number of users the username and password
+    #get the number of users the username and password
     $num_of_users = mysqli_num_rows($result);
     
-    //if a user exists (if multiple users exist, log in the first one)
+    //if a user exists (if multiple exist, log in the first one)
     if ($num_of_users > 0)
     {
         //set the session access level from the user
