@@ -12,36 +12,26 @@ $email = $_POST ['email'];
 $username = $_POST['username'];
 $password = $_POST['password'];
 
-////connect to the mysql db
-//$dbc = mysqli_connect(DBConfig::$host, DBConfig::$username, DBConfig::$password, DBConfig::$name) or die ("Error connecting to MySQL server: " . mysqli_connect_error());
-//
-////insert the new user in the users table
-//$query = "INSERT into " . DBConfig::$userTable . " (firstname,lastname,email,username,password) VALUES ('$firstname','$lastname','$email','$username','$password')";
-//$result = mysqli_query($dbc, $query) or die ("Error querying database: Inserting new user: " . mysqli_error());
-
+//add the user to the user table
 $query = "INSERT into " . DBConfig::$userTable . " (firstname,lastname,email,username,password) VALUES ('$firstname','$lastname','$email','$username','$password')";
 $result = query_database($query);
 
 //retrieve the assigned login_id for the newly created user
 $query = "SELECT * FROM " . DBConfig::$userTable . " where firstname='$username'";
-//$result = mysqli_query($dbc, $query) or die ("Error querying database: Retrieving login_id: " . mysqli_error());
 $result = query_database($query);
 
-//store the result in an array
+//store the result in an assoc array
 $info = mysqli_fetch_assoc($result);
 
+//get the auto-incremented login_id from the array
 $login_id = $info['login_id'];
 $access = '1';
 
 //insert the new user in the permissions table
 $query = "INSERT into " . DBConfig::$permissionsTable . " (login_id,access) VALUES ('$login_id','$access')";
-//$result = mysqli_query($dbc, $query) or die ("Error querying database: Inserting new permissions: " . mysqli_error());
 $result = query_database($query);
 
-//close off access to the db
-//mysqli_close($dbc);
-
-//redirect to index.html
-header('Location:../index.html');
+//redirect to contact.php
+header('Location:../contact.php');
 
 ?>

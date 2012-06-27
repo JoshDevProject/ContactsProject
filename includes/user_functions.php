@@ -25,19 +25,13 @@ function user_login ($username,$password)
 //also sets the session access level from the users info
 function authenticate ($username,$password) 
 {  
-    //form a connection with the database
-    $dbc = mysqli_connect(DBConfig::$host, DBConfig::$username, DBConfig::$password, DBConfig::$name) or die ("Error connecting to MySQL server: " . mysqli_connect_error());
-    
     //create a query to search the database by username and password
     $query = "SELECT * FROM " . DBConfig::$userTable . " WHERE username='$username' and password='$password'";
-    $result = mysqli_query($dbc, $query) or die("Error querying database");
-    
-    //get the number of users the username and password
-    $num_of_users = mysqli_num_rows($result);
+    $result = query_database($query);
     
     //if a user exists (if multiple exist, log in the first one)
     //set the permission of the session from the permissions table
-    if ($num_of_users > 0)
+    if (mysqli_num_rows($result) > 0)
     {                
         //get an array from the result
         $info = mysqli_fetch_assoc($result);
@@ -47,15 +41,14 @@ function authenticate ($username,$password)
         
         //query the permissions table to get the access level from the login_id
         $query = "SELECT * FROM " . DBConfig::$permissionsTable . " Where login_id='$login_id'";
-        $result = mysqli_query($dbc, $query) or die("Error querying database");
+        $result = query_database($query);
         
         //get an array from the results
         $info = mysqli_fetch_assoc($result);
 
         //set the session access level from the login_id
+        session_start();
         $_SESSION['access'] = $info['access'];
-        
-        echo $_SESSION['access'];
         
         return true;
     }

@@ -11,7 +11,7 @@ class DBConfig
     public static $permissionsTable = 'permissions';
 }
 
-//queries the user table
+//queries the database
 function query_database($query)
 {
     $dbc = mysqli_connect(DBConfig::$host, DBConfig::$username, DBConfig::$password, DBConfig::$name) or die ("Error connecting to MySQL server: " . mysqli_connect_error());

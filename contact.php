@@ -26,9 +26,7 @@
 
 include 'includes/database_functions.php';
 
-//connect to the mysql db
-$dbc = mysqli_connect(DBConfig::$host, DBConfig::$username, DBConfig::$password, DBConfig::$name) or die ("Error connecting to MySQL server: " . mysqli_connect_error());
-
+//start the table
 echo '<table border="1">
     <tr>
         <td><a href="contact.php?sortby=login_id">login_id</a><br></td>
@@ -39,19 +37,20 @@ echo '<table border="1">
         <td><a href="contact.php?sortby=email">email</a><br></td>
     </tr>';
 
-    
+    //check to see if there is a sorting method, go by login_id by default
     if (!empty($_GET))
         $sort_method = $_GET['sortby'];
     else
         $sort_method = 'login_id';
 
     $query = "SELECT * FROM " . DBConfig::$userTable . " ORDER BY " . $sort_method;
-    $result = mysqli_query($dbc, $query) or die ("Error querying database: Retrieving login_id: " . mysqli_error());
-
-    $rows = mysqli_num_rows($result);
+    $result = query_database($query);
     
+    //print out total amount of contacts
+    $rows = mysqli_num_rows($result);
     echo 'Contacts: ' . $rows;
     
+    //loop through all the contacts in the user db
     while($info = mysqli_fetch_assoc($result))
     {
         $xlogin_id  = $info['login_id'];
@@ -69,6 +68,7 @@ echo '<table border="1">
                   <td>' . $xemail     . '</td><tr>';
     }
 
+    //end the table
     echo '</table>'
 ?>
 
