@@ -5,15 +5,18 @@ include 'database_functions.php';
 //authenticates and redirects the user
 function user_login ($username,$password) 
 {
+    //start the session
     session_start();
     
+    //authenticate the user
     if (authenticate($username,$password)) 
     {        
-        
+        //redirect to 1.php
         header("location: 1.php");
     }
     else 
     {
+        //display error message
         echo "Wrong Username or Password.<br>";
     }
 }
