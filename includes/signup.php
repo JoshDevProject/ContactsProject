@@ -24,7 +24,10 @@ $result = mysqli_query($dbc, $query) or die ("Error querying database: Inserting
 $query = "SELECT * FROM " . DBConfig::$userTable . " where firstname='$username'";
 $result = mysqli_query($dbc, $query) or die ("Error querying database: Retrieving login_id: " . mysqli_error());
 
-$login_id = mysql_result($result, "login_id");
+//store the result in an array
+$info = mysqli_fetch_assoc($result);
+
+$login_id = $info['login_id'];
 $access = '1';
 
 //insert the new user in the permissions table
