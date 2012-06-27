@@ -61,7 +61,7 @@ function authenticate ($username,$password)
 }
 
 //returns the access level
-function get_access_level ()
+function get_access_level()
 {
     echo $_SESSION['access'];
 }
