@@ -4,7 +4,9 @@ include 'user_functions.php';
 
 echo "Inside 1.php";
 
-get_access_level();
+echo $_SESSION['access'];
+
+//get_access_level();
 
 
 ?>
