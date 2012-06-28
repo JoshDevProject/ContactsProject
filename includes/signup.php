@@ -13,23 +13,22 @@ $username = $_POST['username'];
 $password = $_POST['password'];
 
 //add the user to the user table
-$query = "INSERT into " . DBConfig::$userTable . " (firstname,lastname,email,username,password) VALUES ('$firstname','$lastname','$email','$username','$password')";
-$result = query_database($query);
+$result = query_database("INSERT into " . DBConfig::$userTable . " (firstname,lastname,email,username,password) VALUES ('$firstname','$lastname','$email','$username','$password')");
 
 //retrieve the assigned login_id for the newly created user
-$query = "SELECT * FROM " . DBConfig::$userTable . " where firstname='$username'";
-$result = query_database($query);
+$result = query_database("SELECT * FROM " . DBConfig::$userTable . " where firstname='$username'");
 
 //store the result in an assoc array
 $info = mysqli_fetch_assoc($result);
 
 //get the auto-incremented login_id from the array
 $login_id = $info['login_id'];
+
+//define access for the new user
 $access = '1';
 
 //insert the new user in the permissions table
-$query = "INSERT into " . DBConfig::$permissionsTable . " (login_id,access) VALUES ('$login_id','$access')";
-$result = query_database($query);
+$result = query_database("INSERT into " . DBConfig::$permissionsTable . " (login_id,access) VALUES ('$login_id','$access')");
 
 //redirect to contact.php
 header('Location:../contact.php');

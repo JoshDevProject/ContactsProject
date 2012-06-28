@@ -1,9 +1,13 @@
 <html>
 <head>
-    <title>Login Project | Sign Up Page</title>
+    <title>Login Project | Contact Page</title>
     <link rel="stylesheet" href="includes/style.css" type="text/css">
 </head>
 <body>    
+    <h1>OMFG SUM LYNKZ</h1>
+    <a href="signup.html">Sign Up</a><br>
+    <a href="login.html">Login</a><br>
+    <a href="contact.php">Contact</a><br>
     <div class="login_wrapper" align="center">
         <form method="post" action="includes/signup.php">
             <label>First Name:</label>

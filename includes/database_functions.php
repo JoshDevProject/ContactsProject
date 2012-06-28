@@ -2,13 +2,15 @@
 
 class DBConfig
 {
+    //database authentication info
     public static $host = 'localhost';
     public static $username = 'josh';
     public static $password = 'password';
     public static $name = 'login_project';
     
+    //tables within the database
     public static $userTable = 'users';
-    public static $permissionsTable = 'permissions';
+    public static $permissionsTable = 'perms';
 }
 
 //queries the database
