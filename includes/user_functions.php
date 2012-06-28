@@ -4,13 +4,10 @@ include 'database_functions.php';
 
 //authenticates and redirects the user
 function user_login ($username,$password) 
-{
-    //start the session
-    session_start();
-    
+{    
     //authenticate the user
     if (authenticate($username,$password)) 
-    {        
+    {       
         //redirect to 1.php
         header("location: 1.php");
     }
@@ -45,15 +42,15 @@ function authenticate ($username,$password)
         $info = mysqli_fetch_assoc($result);
 
         //set the session access level from the login_id
-        session_start();
         $_SESSION['access'] = $info['access'];
         
         return true;
     }
     else
     {
-        //otherwise, set session access as "not_a_user"
+        //otherwise, set session access as 0
         $_SESSION['access'] = 0;
+        
         return false;
     }
 }

@@ -2,6 +2,12 @@
 
 include 'database_functions.php';
 
+//start the session
+session_start();
+
+//provide 0 access until user is logged in
+$_SESSION['access'] = '0';
+
 //retrieve user information from signup.html
 $firstname =    $_POST['firstname'];
 $lastname =     $_POST['lastname'];
