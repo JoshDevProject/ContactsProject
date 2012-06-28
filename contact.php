@@ -37,14 +37,13 @@ echo '<table border="1">
         <td><a href="contact.php?sortby=email">email</a><br></td>
     </tr>';
 
-    //check to see if there is a sorting method, go by login_id by default
+    //check to see if there is a sorting method, sort by login_id by default
     if (!empty($_GET))
         $sort_method = $_GET['sortby'];
     else
         $sort_method = 'login_id';
 
-    $query = "SELECT * FROM " . DBConfig::$userTable . " ORDER BY " . $sort_method;
-    $result = query_database($query);
+    $result = query_database("SELECT * FROM " . DBConfig::$userTable . " ORDER BY " . $sort_method);
     
     //print out total amount of contacts
     $rows = mysqli_num_rows($result);
