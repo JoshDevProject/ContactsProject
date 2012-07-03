@@ -23,7 +23,7 @@ function user_login ($username,$password)
 function authenticate ($username,$password) 
 {  
     //create a query to search the database by username and password
-    $result = query_database("SELECT * FROM " . DBConfig::$userTable . " WHERE username='$username' and password='$password'");
+    $result = DB::query_database("SELECT * FROM " . DBConfig::$userTable . " WHERE username='$username' and password='$password'");
     
     //if a user exists (if multiple exist, log in the first one)
     //set the permission of the session from the permissions table
@@ -36,7 +36,7 @@ function authenticate ($username,$password)
         $login_id = $info['login_id'];
         
         //query the permissions table to get the access level from the login_id
-        $result = query_database("SELECT * FROM " . DBConfig::$permissionsTable . " Where login_id='$login_id'");
+        $result = DB::query_database("SELECT * FROM " . DBConfig::$permissionsTable . " Where login_id='$login_id'");
         
         //get an array from the results
         $info = mysqli_fetch_assoc($result);

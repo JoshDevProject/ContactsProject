@@ -2,6 +2,7 @@
 <head>
     <title>Login Project | Contact Page</title>
     <link rel="stylesheet" href="includes/style.css" type="text/css">
+    <script src="jquery.js"></script>
 </head>
 <body>    
     <h1>OMFG SUM LYNKZ</h1>
@@ -24,6 +25,7 @@
         </form>
     </div>
     <br><br><br><br>
+    
 </body>
 </html>
 <?php
@@ -39,6 +41,7 @@ echo '<table border="1">
         <td><a href="contact.php?sortby=firstname">firstname</a><br></td>
         <td><a href="contact.php?sortby=lastname">lastname</a><br></td>
         <td><a href="contact.php?sortby=email">email</a><br></td>
+        <td><a href="">X</a><br></td>
     </tr>';
 
     //check to see if there is a sorting method, sort by login_id by default
@@ -46,18 +49,18 @@ echo '<table border="1">
         $sort_method = $_GET['sortby'];
     else
         $sort_method = 'login_id';
-
-    $result = query_database("SELECT * FROM " . DBConfig::$userTable . " ORDER BY " . $sort_method);
+    
+    $result = DB::query_database("SELECT * FROM " . DBConfig::$userTable . " ORDER BY " . $sort_method);
     
     //print out total amount of contacts
     $rows = mysqli_num_rows($result);
     echo 'Contacts: ' . $rows;
     
     //loop through all the contacts in the user db
-    while($info = mysqli_fetch_assoc($result))
+    for($i = 1; $info = mysqli_fetch_assoc($result); $i++)
     {
         $xlogin_id  = $info['login_id'];
-        $xusername  = $info['username']; 
+        $xusername  = $info['username'];
         $xpassword  = $info['password'];
         $xfirstname = $info['firstname'];
         $xlastname  = $info['lastname'];
@@ -68,11 +71,18 @@ echo '<table border="1">
                   <td>' . $xpassword  . '</td>
                   <td>' . $xfirstname . '</td>
                   <td>' . $xlastname  . '</td>
-                  <td>' . $xemail     . '</td><tr>';
+                  <td>' . $xemail     . '</td>
+                  <td><a href="contact.php?delete=' . $i . '">x</a><br></td><tr>';
     }
 
     //end the table
     echo '</table>'
+    
+    //to delete contacts with ajax...
+    //assign each row an id = $i;
+    //when the x button is pushed, tell it to hide the piece with that id
+    //run the delete on a page refresh, ajax?
+
 ?>
 
 </html>

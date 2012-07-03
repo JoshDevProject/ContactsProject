@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+        <title>jquery practice</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <script src="jquery.js"></script>
+        
+        <style>
+            
+            a.test { 
+                font-weight: bold;
+                font-size: 5;
+            }
+            
+        </style>
+        
+</head>
+
+<body>
+    
+    <table border="1">
+    <tr>
+        <td><a href="" id="r1">r1 c1</a><br></td>
+        <td><a href="" id="r1">r1 c2</a><br></td>
+        <td><a href="" id="r1">r1 c3</a><br></td>
+        <td><a href="" id="r1">r1 c4</a><br></td>
+        <td><a href="" id="r1">r1 c5</a><br></td>
+    </tr>
+    <tr>
+        <td><a href="" id="r2">r2 c1</a><br></td>
+        <td><a href="" id="r2">r2 c2</a><br></td>
+        <td><a href="" id="r2">r2 c3</a><br></td>
+        <td><a href="" id="r2">r2 c4</a><br></td>
+        <td><a href="" id="r2">r2 c5</a><br></td>
+    </tr>
+    <tr>
+        <td><a href="" id="r3">r3 c1</a><br></td>
+        <td><a href="" id="r3">r3 c2</a><br></td>
+        <td><a href="" id="r3">r3 c3</a><br></td>
+        <td><a href="" id="r3">r3 c4</a><br></td>
+        <td><a href="" id="r3">r3 c5</a><br></td>
+    </tr>
+    </table>
+    
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+          $("#r1").click(function(event){
+            $("#r1").addClass("test");
+            event.preventDefault();
+          });
+          
+          $("#r2").click(function(event){
+            $("#r2").addClass("test");
+            event.preventDefault();
+          });
+          
+          $("#r3").click(function(event){
+            $("#r3").addClass("test");
+            event.preventDefault();
+          });
+        });      
+        
+        
+    </script>
+    
+
+    
+</body>
+</html>
