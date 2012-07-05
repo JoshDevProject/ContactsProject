@@ -10,17 +10,17 @@
     <a href="login.html">Login</a><br>
     <a href="contact.php">Contact</a><br>
     <div class="login_wrapper" align="center">
-        <form method="post" action="includes/signup.php">
+        <form id="newUserForm" method="post" action="includes/signup.php">
             <label>First Name:</label>
-            <input type="text" name="firstname"><br>
+            <input id="firstname" type="text" name="firstname"><br>
             <label>Last Name:</label>
-            <input type="text" name="lastname"><br>
+            <input id="lastname" type="text" name="lastname"><br>
             <label>Email:</label>
-            <input type="text" name="email"><br>
+            <input id="email" type="text" name="email"><br>
             <label>Username:</label>
-            <input type="text" name="username"><br>
+            <input id="username" type="text" name="username"><br>
             <label>Password:</label>
-            <input type="password" name="password"><br>
+            <input id="password" type="password" name="password"><br>
             <input type="submit" class="submit" value="Sign Up">
         </form>
     </div>
@@ -33,7 +33,7 @@
 include 'includes/database_functions.php';
 
 //start the table
-echo '<table border="1">
+echo '<table class="user_table" border="1">
     <tr>
         <td><a href="contact.php?sortby=login_id">login_id</a><br></td>
         <td><a href="contact.php?sortby=username">username</a><br></td>
@@ -41,7 +41,7 @@ echo '<table border="1">
         <td><a href="contact.php?sortby=firstname">firstname</a><br></td>
         <td><a href="contact.php?sortby=lastname">lastname</a><br></td>
         <td><a href="contact.php?sortby=email">email</a><br></td>
-        <td><a href="">X</a><br></td>
+        <td>Del<br></td>
     </tr>';
 
     //check to see if there is a sorting method, sort by login_id by default
@@ -73,7 +73,7 @@ echo '<table border="1">
                   <td>' . $xfirstname . '</td>
                   <td>' . $xlastname  . '</td>
                   <td>' . $xemail     . '</td>
-                  <td><a href="contact.php?delete=' . $i . '">x</a><br></td><tr>';
+                  <td name=delete>X</td>';
     }
 
     //end the table
@@ -82,11 +82,36 @@ echo '<table border="1">
 ?>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
     <script>
+
+        //adds a new user
         $(document).ready(function(){
-          $("[name^='row']").click(function(event){
-            $(this).parent().remove();
-          });
-        });              
+            $("#newUserForm").submit(function(event){
+                //cancel the use of the button
+                event.preventDefault();
+
+               //get values from the form
+               var $firstname = $(".firstname").val();
+               var $lastname = $("#lastname").val();
+               var $email = $("#email").val();
+               var $username = $("#username").val();
+               var $password = $("#password").val();
+               
+               //debug - show that we got the right user info
+               alert("Adding user: " . $firstname);
+            });        
+        });
+        
+        //deletes a row
+        $(document).ready(function(){
+           $("[name^='delete']").click(function(event){
+               //get the login_id from the row
+               
+               //remove this row
+               $(this).parent().remove();    
+              
+
+           });
+        });         
     </script>
     
 </html>
