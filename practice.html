@@ -1,72 +1,51 @@
 <!DOCTYPE html>
 <html>
 <head>
-    
         <title>jquery practice</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        
         <script src="jquery.js"></script>
-        
         <style>
-            
             a.test { 
                 font-weight: bold;
-                color: red;
+                color: green;
             }
-            
         </style>
-        
 </head>
 
 <body>
     
-    <table border="4">
-    <tr>
-        <td><a href="" id="r1">r1 c1</a><br></td>
-        <td><a href="" id="r1">r1 c2</a><br></td>
-        <td><a href="" id="r1">r1 c3</a><br></td>
-        <td><a href="" id="r1">r1 c4</a><br></td>
-        <td><a href="" id="r1">r1 c5</a><br></td>
+    <table border="1" class="mytable">
+    <tr id="row1">
+        <td class="c1">r1 c1<br></td>
+        <td class="c2">r1 c2<br></td>
+        <td class="c3">r1 c3<br></td>
+        <td class="c4">r1 c4<br></td>
+        <td class="c5">r1 c5<br></td>
     </tr>
-    <tr>
-        <td><a href="" id="r2">r2 c1</a><br></td>
-        <td><a href="" id="r2">r2 c2</a><br></td>
-        <td><a href="" id="r2">r2 c3</a><br></td>
-        <td><a href="" id="r2">r2 c4</a><br></td>
-        <td><a href="" id="r2">r2 c5</a><br></td>
+    <tr id="row2">
+        <td class="c1">r2 c1<br></td>
+        <td class="c2">r2 c2<br></td>
+        <td class="c3">r2 c3<br></td>
+        <td class="c4">r2 c4<br></td>
+        <td class="c5">r2 c5<br></td>
     </tr>
-    <tr>
-        <td><a href="" id="r3">r3 c1</a><br></td>
-        <td><a href="" id="r3">r3 c2</a><br></td>
-        <td><a href="" id="r3">r3 c3</a><br></td>
-        <td><a href="" id="r3">r3 c4</a><br></td>
-        <td><a href="" id="r3">r3 c5</a><br></td>
+    <tr id="row3">
+        <td class="c1">r3 c1<br></td>
+        <td class="c2">r3 c2<br></td>
+        <td class="c3">r3 c3<br></td>
+        <td class="c4">r3 c4<br></td>
+        <td class="c5">r3 c5<br></td>
     </tr>
     </table>
     
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
     <script>
         $(document).ready(function(){
-          $("#r1").click(function(event){
-            $("#r1").addClass("test");
-            event.preventDefault();
+          $("#row1").click(function(event){
+            $("#row1").remove();
           });
-          
-          $("#r2").click(function(event){
-            $("#r2").addClass("test");
-            event.preventDefault();
-          });
-          
-          $("#r3").click(function(event){
-            $("#r3").addClass("test");
-            event.preventDefault();
-          });
-        });      
-        
-        
+        });              
     </script>
-    
-
     
 </body>
 </html>

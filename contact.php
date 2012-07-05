@@ -66,7 +66,8 @@ echo '<table border="1">
         $xlastname  = $info['lastname'];
         $xemail     = $info['email'];
         
-        echo '<tr><td>' . $xlogin_id  . '</td>
+        echo '<tr name=row'. $i .'>
+                  <td>' . $xlogin_id  . '</td>
                   <td>' . $xusername  . '</td>
                   <td>' . $xpassword  . '</td>
                   <td>' . $xfirstname . '</td>
@@ -77,12 +78,15 @@ echo '<table border="1">
 
     //end the table
     echo '</table>'
-    
-    //to delete contacts with ajax...
-    //assign each row an id = $i;
-    //when the x button is pushed, tell it to hide the piece with that id
-    //run the delete on a page refresh, ajax?
 
 ?>
-
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+          $("[name^='row']").click(function(event){
+            $(this).parent().remove();
+          });
+        });              
+    </script>
+    
 </html>
