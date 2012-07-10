@@ -24,7 +24,7 @@
             <input type="submit" class="submit" value="Sign Up">
         </form>
     </div>
-    <br><br><br><br>
+    <br><br>
     
 </body>
 </html>

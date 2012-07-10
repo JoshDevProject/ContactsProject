@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login Project | Ajax Contact Page</title>
+        <link rel="stylesheet" href="includes/style.css" type="text/css">
+        <script src="includes/libraries/jquery.js"></script>
+    </head>
+    <body>
+        <div class="login_wrapper" align="center">
+            <form id="newUserForm">
+                <label>First Name:</label>
+                <input id="firstname" type="text" name="firstname"><br>
+                <label>Last Name:</label>
+                <input id="lastname" type="text" name="lastname"><br>
+                <label>Email:</label>
+                <input id="email" type="text" name="email"><br>
+                <label>Username:</label>
+                <input id="username" type="text" name="username"><br>
+                <label>Password:</label>
+                <input id="password" type="password" name="password"><br>
+                <input type="button" class="adduserbtn" value="Sign Up">
+            </form>
+            <div id="confirmation"></div>
+        </div>
+    <br><br>
+    
+    <div id="database_display" ></div>
+    
+    <script>
+        $(document).ready(function(){
+            $(".user_table").hide();
+        });
+    </script>
+    
+    <script>
+
+        $(document).ready(function(){
+          
+            //how the database is sorted
+            var vsortBy = "login_id";
+            
+            //process add user button when it is clicked
+            $(".adduserbtn").click(function(event){
+                //remove redirect from button
+                event.preventDefault();
+                
+                //get variables from the form
+                var vfirstname   = $("#firstname").val();
+                var vlastname    = $("#lastname").val();
+                var vemail       = $("#email").val();
+                var vusername    = $("#username").val();
+                var vpassword    = $("#password").val();
+                
+                //process the contact data
+                $.post(
+                    'includes/database_functions.php', 
+                    { processor: 'add_user', firstname: vfirstname, lastname: vlastname, email: vemail, username: vusername, password: vpassword},
+                    function(data) {
+                        //briefly show the contact loaded
+                        $("#confirmation").html(data).delay(1000).hide("slow"); 
+                        //clear fields
+                        $('form :input').val("");
+                        
+                        //fix the button
+                        $(".adduserbtn").val("Sign Up");
+                });  
+                
+                //refresh the database display below
+                display_database(vsortBy);
+            });
+            
+            //initially set the database display
+            display_database(vsortBy);
+            
+            //determine if we want to sort by any of the methods
+            //$("#username").click(function(){
+            //    vsortBy = "username";
+            //    alert(vsortBy);
+            //    display_database(vsortBy);
+            //});
+                      
+            //displays the database
+            function display_database(vsortBy)
+            {
+                $.post(
+                    'includes/database_functions.php',
+                    { processor: 'display_database', sortBy: vsortBy },
+                    function(data){
+                        $("#database_display").html(data);
+                    }
+                );
+            }
+        });
+    </script>
+    
+    </body>
+</html>

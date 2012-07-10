@@ -1,0 +1,50 @@
+HTML  Reference
+
+basic skeleton:
+==================================
+<html>
+<head>
+	<title>Title</title>
+	<link rel="stylesheet" href="includes/style.css" type="text/css">
+</head>
+<body>
+</body>
+</html>
+
+header:
+==================================
+<h1>header size 1</h1>
+<h2>header size 2</h2>
+
+links:
+==================================
+<a href="link.html">Link Text</a>
+
+forms:
+==================================
+<div class="login_wrapper" align="center">
+	<form id="newUserForm" method="post" action="includes/signup.php">
+		<label>First Name:</label>
+		<input id="firstname" type="text" name="firstname"><br>
+		<label>Last Name:</label>
+		<input id="lastname" type="text" name="lastname"><br>
+		<input type="submit" class"submit" value="Sign Up">
+	</form>
+</div>
+
+tables:
+==================================
+<table class="user_table" border="1">
+	<tr>
+		<td>Row 1 Column 1</td>
+		<td>Row 1 Column 2</td>
+		<td>Row 1 Column 3</td>
+		<td>Row 1 Column 4</td>
+	</tr>
+	<tr>
+		<td>Row 2 Column 1</td>
+		<td>Row 2 Column 2</td>
+		<td>Row 2 Column 3</td>
+		<td>Row 2 Column 4</td>
+	</tr>
+</table>

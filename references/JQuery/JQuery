@@ -1,0 +1,60 @@
+JQuery Reference
+
+tags:
+==================================
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+<script>
+	//jquery code here
+</script>
+
+run when document finishes loading:
+==================================
+$(document).ready(function(){
+
+});
+//OR
+$(function(){
+
+});
+
+
+Selecting elements
+==================================
+id 	  ->  #
+class ->  .
+
+<div id="testID" class="testClass"></div>
+
+<script>
+	$(document).ready(fucntion(){
+		$("#testID").click(function(){
+			//perform action on any element with an id of 'testID'
+		});
+		$(".testClass").click(function(){
+			//perform action on any element with a class of 'testClass'
+		});
+	});
+</script>
+
+Check if an element exists
+=======================================
+if ($("#someDiv").length){
+	//it exists
+}
+
+Get Mouse Coordinates
+==========================================
+$().mousemove(function(e){
+	//display coordinates inside the P element
+	$('p').html("X Axis: " + e.PageX + " | Y Axis " + e.pageY);
+});
+
+Delete Row from HTML Table by clicking it
+=========================================
+$(document).ready(function(){
+	$("#sample tr").click(function(){
+		$(this).fadeOut(400, function(){
+			$(this).remove();
+		});
+	});
+});

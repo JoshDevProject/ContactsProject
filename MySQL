@@ -1,0 +1,29 @@
+MySQL  Reference (with some PHP)
+
+Connect to a database:
+==================================
+$dbHandle = mysqli_connect($host, $username, $password, $dbname);
+
+Close connection to database:
+==================================
+mysqli_close($dbc);
+
+Query database:
+==================================
+$result = mysqli_query($dbHandle, $query);
+
+Search for a rows:
+==================================
+$query = "SELECT * FROM " . $tableName . " where username='$username'";
+
+Search for rows, and sort by field:
+==================================
+$query = "SELECT * FROM " . $tableName . " ORDER BY " . $field;
+
+Add a row:
+==================================
+$query = "INSERT into " . $tableName . " (field1,field2,field3) VALUES ('$field1','$field2','$field3')";
+
+Convert query result to associative array:
+==================================
+$info = mysqli_fetch_assoc($result);

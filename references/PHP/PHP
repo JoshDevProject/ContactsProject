@@ -1,0 +1,43 @@
+PHP  Reference
+
+Includes: (copies that file at this place)
+==================================
+include 'file_to_copy_here.php'
+
+Code Tags:
+==================================
+<?php //php code ?>
+
+Writing out to the screen:
+==================================
+echo 'hello world!';
+print_r('hello world!');
+
+"Global" Variables:
+==================================
+$_POST['name']
+$_GET['name']
+$_SESSION['name']
+
+redirect:
+==================================
+header('Path/To/New/Page.php');
+
+function:
+==================================
+function nameOfFunction($argument1, $argument2)
+{
+	//dont have to use every argument either
+	//dont need to return anything either
+}
+
+loop through array:
+==================================
+foreach ($array as $key => $value)
+{
+	echo 'Key is: ' . $key . ' and value is: ' . $value;
+}
+
+check if a variable is an array:
+==================================
+is_array($var);
