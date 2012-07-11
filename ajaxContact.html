@@ -27,9 +27,9 @@
     <div id="database_display" ></div>
     
     <script>
-        $(document).ready(function(){
-            $(".user_table").hide();
-        });
+        //$(document).ready(function(){
+        //    $(".user_table").child().parent().hide();
+        //});
     </script>
     
     <script>
@@ -57,7 +57,11 @@
                     { processor: 'add_user', firstname: vfirstname, lastname: vlastname, email: vemail, username: vusername, password: vpassword},
                     function(data) {
                         //briefly show the contact loaded
-                        $("#confirmation").html(data).delay(1000).hide("slow"); 
+                        $("#confirmation").html(data).delay(1000).hide("slow");
+                        
+                        //reset the effect
+                        //$("#confirmation").html("").show();
+                        
                         //clear fields
                         $('form :input').val("");
                         
