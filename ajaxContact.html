@@ -24,13 +24,8 @@
         </div>
     <br><br>
     
-    <div id="database_display" ></div>
     
-    <script>
-        //$(document).ready(function(){
-        //    $(".user_table").child().parent().hide();
-        //});
-    </script>
+    <div id="database_display" ></div>
     
     <script>
 
@@ -38,6 +33,7 @@
           
             //how the database is sorted
             var vsortBy = "login_id";
+            var rev = false;
             
             //process add user button when it is clicked
             $(".adduserbtn").click(function(event){
@@ -58,43 +54,102 @@
                     function(data) {
                         //briefly show the contact loaded
                         $("#confirmation").html(data).delay(1000).hide("slow");
-                        
-                        //reset the effect
-                        //$("#confirmation").html("").show();
-                        
                         //clear fields
                         $('form :input').val("");
-                        
                         //fix the button
-                        $(".adduserbtn").val("Sign Up");
+                        $(".adduserbtn").val("Sign Up");           
+                        
                 });  
                 
                 //refresh the database display below
-                display_database(vsortBy);
+                display_database(vsortBy, rev);
             });
             
             //initially set the database display
-            display_database(vsortBy);
-            
-            //determine if we want to sort by any of the methods
-            //$("#username").click(function(){
-            //    vsortBy = "username";
-            //    alert(vsortBy);
-            //    display_database(vsortBy);
-            //});
-                      
-            //displays the database
-            function display_database(vsortBy)
-            {
-                $.post(
-                    'includes/database_functions.php',
-                    { processor: 'display_database', sortBy: vsortBy },
-                    function(data){
-                        $("#database_display").html(data);
-                    }
-                );
-            }
+            display_database(vsortBy, rev);            
         });
+        
+        //displays the database
+        function display_database(vsortBy, vreversed)
+        {            
+            //handle sorting by clicking the top categories
+            $("#database_display").on('click', '#login_id', function(){
+                if (vsortBy == "login_id")
+                    vreversed = !vreversed;
+                else{
+                        vsortBy = "login_id";
+                        vreversed = false;
+                }
+                display_database(vsortBy, vreversed);
+                exit;
+            });
+            $("#database_display").on('click', '#username', function(){
+                if (vsortBy == "username")
+                    vreversed = !vreversed;
+                else{
+                        vsortBy = "username";
+                        vreversed = false;
+                }
+                display_database(vsortBy, vreversed);
+                exit;
+            });
+            
+            $("#database_display").on('click', '#password', function(){
+                if (vsortBy == "password")
+                    vreversed = !vreversed;
+                else{
+                        vsortBy = "password";
+                        vreversed = false;
+                }
+                display_database(vsortBy, vreversed);
+                exit;
+            });
+            $("#database_display").on('click', '#firstname', function(){
+                if (vsortBy == "firstname")
+                    vreversed = !vreversed;
+                else{
+                        vsortBy = "firstname";
+                        vreversed = false;
+                }
+                display_database(vsortBy, vreversed);
+                exit;
+            });
+            $("#database_display").on('click', '#lastname', function(){
+                if (vsortBy == "lastname")
+                    vreversed = !vreversed;
+                else{
+                        vsortBy = "lastname";
+                        vreversed = false;
+                }
+                display_database(vsortBy, vreversed);
+                exit;
+            });
+            $("#database_display").on('click', '#email', function(){
+                if (vsortBy == "email")
+                    vreversed = !vreversed;
+                else{
+                        vsortBy = "email";
+                        vreversed = false;
+                }
+                display_database(vsortBy, vreversed);
+                exit;
+            });
+        
+            //handle deleting contacts
+            $("database_display").on('click', '[name^="delete"]', function(){
+               $(this).remove(); 
+            });
+            
+            $.post(
+                'includes/database_functions.php',
+                { processor: 'display_database', sortBy: vsortBy, rev: vreversed },
+                function(data){ 
+                    //display the table
+                    $("#database_display").html(data);
+                }
+            );
+        }
+        
     </script>
     
     </body>

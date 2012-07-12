@@ -11,7 +11,7 @@ if (isset($_POST['processor']))
             echo $_POST['firstname'] . ' ' . $_POST['lastname'] . ' has been added to the database.';
             break;
         case 'display_database':
-            DB::HTMLTableDisplay($_POST['sortBy']);
+            DB::HTMLTableDisplay($_POST['sortBy'], $_POST['rev']);
             break;
         default:
             echo "No matching processor for: " . $_POST['processor'];
@@ -65,29 +65,36 @@ class DB
         $result = DB::query_database("INSERT into " . DBConfig::$permissionsTable . " (login_id,access) VALUES ('$login_id','$access')");
     }
     
-    static function HTMLTableDisplay($sortBy)
+    static function HTMLTableDisplay($sortBy, $rev)
     {
-        echo '<table class="user_table" border="1">
-            <tr>
-                <td><div id=login_id">login_id<br></div></td>
-                <td><div id="username">username<br></div></td>
-                <td>password<br></td>
-                <td>firstname<br></td>
-                <td>lastname<br></td>
-                <td>email<br></td>
-                <td>Del<br></td>
-            </tr>';
-        
-        //check to see if there is a sorting method, sort by login_id by default
+
+        //set defaults for sorting if not supplied
         if (!isset($sortBy))
             $sortBy = "login_id";
-        
-        $result = DB::query_database("SELECT * FROM " . DBConfig::$userTable . " ORDER BY " . $sortBy);
-    
-        //print out total amount of contacts
-        $rows = mysqli_num_rows($result);
-        //echo 'Contacts: ' . $rows;
+        if (!isset($rev))
+            $rev = False;
+                
+        $query = "SELECT * FROM " . DBConfig::$userTable . " ORDER BY " . $sortBy;
 
+        echo "Reverse: " . $rev;
+        
+        if ($rev == True)
+            $query .= " DESC";
+        
+        $result = DB::query_database($query);
+
+        
+        echo '<table class="user_table" border="1">
+           <tr>
+               <td><div id="login_id">login_id<br></div></td>
+               <td><div id="username">username<br></div></td>
+               <td><div id="password">password<br></div></td>
+               <td><div id="firstname">firstname<br></div></td>
+               <td><div id="lastname">lastname<br></div></td>
+               <td><div id="email">email<br></div></td>
+               <td><div id="delete">Del<br></div></td>
+           </tr>';
+        
         //loop through all the contacts in the user db
         for($i = 1; $info = mysqli_fetch_assoc($result); $i++)
         {
